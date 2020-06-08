@@ -1,5 +1,6 @@
 <script>
   import { createEventDispatcher } from 'svelte';
+  import DataTable, { Head, Body, Row, Cell } from '@smui/data-table';
 
   const dispatch = createEventDispatcher();
 
@@ -95,24 +96,17 @@
 </script>
 
 <style>
-  table {
-    width: 100%;
-  }
   .isSortable {
     cursor: pointer;
   }
-
-  tr th select {
-    width: 100%;
-  }
 </style>
 
-<table class={asStringArray(classNameTable)}>
-  <thead class={asStringArray(classNameThead)}>
+<DataTable class={asStringArray(classNameTable)}>
+  <Head class={asStringArray(classNameThead)}>
     {#if showFilterHeader}
-      <tr>
+      <Row>
         {#each columns as col}
-          <th>
+          <Cell>
             {#if filterValues[col.key] !== undefined}
               <select bind:value={filterSettings[col.key]} class={asStringArray(classNameSelect)}>
                 <option value={undefined}></option>
@@ -121,14 +115,14 @@
                 {/each}
               </select>
             {/if}
-          </th>
+          </Cell>
         {/each}
-      </tr>
+      </Row>
     {/if}
       <slot name="header" sortOrder={sortOrder} sortBy={sortBy}>
-        <tr>
+        <Row>
           {#each columns as col}
-            <th
+            <Head
               on:click={(e) => handleClickCol(e, col)}
               class={asStringArray([col.sortable ? 'isSortable' : null, col.headerClass])}
             >
@@ -136,23 +130,23 @@
               {#if sortBy === col.key}
                 { sortOrder === 1 ? iconAsc : iconDesc}
               {/if}
-            </th>
+            </Head>
           {/each}
-        </tr>
+        </Row>
       </slot>
-  </thead>
-  <tbody class={asStringArray(classNameTbody)}>
+  </Head>
+  <Body class={asStringArray(classNameTbody)}>
     {#each c_rows as row, n}
       <slot name="row" row={row} n={n} >
-        <tr on:click={(e)=>{handleClickRow(e, row)}} class={asStringArray(classNameRow)}>
+        <Row on:click={(e)=>{handleClickRow(e, row)}} class={asStringArray(classNameRow)}>
           {#each columns as col}
-            <td
+            <Cell
               on:click={(e)=>{handleClickCell(e, row, col.key)}}
               class={asStringArray([col.class, classNameCell])}
-            >{@html col.renderValue ? col.renderValue(row) : col.value(row)}</td>
+            >{@html col.renderValue ? col.renderValue(row) : col.value(row)}</Cell>
           {/each}
-        </tr>
+        </Row>
       </slot>
     {/each}
-  </tbody>
-</table>
+  </Body>
+</DataTable>
