@@ -18,6 +18,12 @@
     "autobuild": "rollup -c -w",
     "dev": "run-p start:dev autobuild",
     "start": "sirv public --single",
-    "start:dev": "sirv public --single --dev"
+    "start:dev": "sirv public --single --dev",
+    "postinstall": "cd ./node_modules/svelte-table && npm i && npm run build"
+  },
+  "devDependencies": {
+    "path": "^0.12.7",
+    "postcss": "^7.0.32",
+    "sass": "^1.26.8"
   }
 }

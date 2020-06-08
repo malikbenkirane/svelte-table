@@ -8,15 +8,18 @@
   "svelte": "src/SvelteTable.svelte",
   "scripts": {
     "build": "rollup -c",
-    "dev": "rollup -c -w",
+    "dev": "rollup -c -w"
   },
   "devDependencies": {
+    "path": "^0.12.7",
     "rollup": "^1.32.1",
     "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-polyfill": "^3.0.0",
+    "rollup-plugin-postcss": "^3.1.2",
     "rollup-plugin-svelte": "^5.2.2",
     "rollup-plugin-terser": "^5.3.0",
+    "sass": "^1.26.8",
     "svelte": "^3.22.3"
   },
   "keywords": [
@@ -26,6 +29,7 @@
   ],
   "dependencies": {
     "@smui/data-table": "^1.0.0-beta.21",
+    "@smui/select": "^1.0.0-beta.21",
     "svelte-table": "^0.1.9"
   }
 }

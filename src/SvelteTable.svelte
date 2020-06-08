@@ -1,6 +1,7 @@
 <script>
   import { createEventDispatcher } from 'svelte';
   import DataTable, { Head, Body, Row, Cell } from '@smui/data-table';
+  import Select, {Option} from '@smui/select';
 
   const dispatch = createEventDispatcher();
 
@@ -108,12 +109,12 @@
         {#each columns as col}
           <Cell>
             {#if filterValues[col.key] !== undefined}
-              <select bind:value={filterSettings[col.key]} class={asStringArray(classNameSelect)}>
-                <option value={undefined}></option>
+              <Select bind:value={filterSettings[col.key]} class={asStringArray(classNameSelect)}>
+                <Option value={undefined}></Option>
                 {#each filterValues[col.key] as option}
-                  <option value={option.value}>{option.name}</option>
+                  <Option value={option.value}>{option.name}</Option>
                 {/each}
-              </select>
+              </Select>
             {/if}
           </Cell>
         {/each}

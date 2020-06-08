@@ -1,4 +1,5 @@
-
+import path from 'path';
+import postcss from 'rollup-plugin-postcss';
 import svelte from 'rollup-plugin-svelte';
 import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
@@ -12,6 +13,20 @@ const name = 'SvelteTable';
 const plugins = [
   svelte(),
   resolve(),
+  postcss({
+    extensions: ['.scss', '.sass'],
+    extract: false,
+    minimize: true,
+    use: [
+      ['sass', {
+        includePaths: [
+          './src/theme',
+          './node_modules',
+          path.resolve(__dirname, '..', 'node_modules')
+        ]
+      }]
+    ]
+  }),
   commonjs(),
   minify && terser(),
 ]
