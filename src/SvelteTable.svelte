@@ -123,7 +123,7 @@
       <slot name="header" sortOrder={sortOrder} sortBy={sortBy}>
         <Row>
           {#each columns as col}
-            <Head
+            <Cell
               on:click={(e) => handleClickCol(e, col)}
               class={asStringArray([col.sortable ? 'isSortable' : null, col.headerClass])}
             >
@@ -131,7 +131,7 @@
               {#if sortBy === col.key}
                 { sortOrder === 1 ? iconAsc : iconDesc}
               {/if}
-            </Head>
+            </Cell>
           {/each}
         </Row>
       </slot>
